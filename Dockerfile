@@ -25,9 +25,9 @@ RUN apk add --update ca-certificates openssl tar tini && \
     rm -Rf etcd-v$VERSION-linux-amd64* /var/cache/apk/*
 
 
-VOLUME      /data
+VOLUME      /etcd-data
 
-EXPOSE      2379 2380 4001 7001
+EXPOSE      2379 2380
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
