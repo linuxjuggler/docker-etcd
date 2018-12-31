@@ -1,5 +1,8 @@
 # Etcd container
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/zaherg/docker-etcd.svg)](https://hub.docker.com/r/zaherg/docker-etcd/) [![](https://images.microbadger.com/badges/image/zaherg/docker-etcd.svg)](https://microbadger.com/images/zaherg/docker-etcd "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/zaherg/docker-etcd.svg)](https://microbadger.com/images/zaherg/docker-etcd "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/zaherg/docker-etcd.svg)](https://microbadger.com/images/zaherg/docker-etcd "Get your own commit badge on microbadger.com")  [![](https://img.shields.io/github/last-commit/linuxjuggler/docker-etcd.svg)](https://github.com/linuxjuggler/docker-etcd)
+
+
 ![etcd Logo](./images/etcd-horizontal-color.svg)
 
 etcd is a distributed reliable key-value store for the most critical data of a distributed system, with a focus on being:

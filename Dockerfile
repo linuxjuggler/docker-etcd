@@ -8,10 +8,10 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
       org.label-schema.name="$DOCKER_REPO:latest" \
-      org.label-schema.description="Lightweight container with Nginx 1.12 & PHP-FPM 7.2 based on Alpine Linux." \
+      org.label-schema.description="Lightweight container with ETCD based on Alpine Linux." \
       org.label-schema.url="https://www.zah.me" \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-url="https://github.com/linuxjuggler/php-and-nginx.git" \
+      org.label-schema.vcs-url="https://github.com/linuxjuggler/docker-etcd.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0"
 
