@@ -1,6 +1,6 @@
 # Etcd container
 
-![etcd Logo](https://raw.githubusercontent.com/etcd-io/etcd/master/logos/etcd-horizontal-color.svg)
+![etcd Logo](./images/etcd-horizontal-color.svg)
 
 etcd is a distributed reliable key-value store for the most critical data of a distributed system, with a focus on being:
 
