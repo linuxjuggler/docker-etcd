@@ -17,12 +17,12 @@ LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
 
 ENV VERSION=3.3.13
 
-RUN apk add --update ca-certificates openssl tar tini && \
+RUN apk add --no-cache ca-certificates openssl tar tini && \
 	wget https://github.com/etcd-io/etcd/releases/download/v$VERSION/etcd-v$VERSION-linux-amd64.tar.gz && \
 	tar xzvf etcd-v$VERSION-linux-amd64.tar.gz && \
 	mv etcd-v$VERSION-linux-amd64/etcd* /bin/ && \
 	apk del --purge tar openssl && \
-    rm -Rf etcd-v$VERSION-linux-amd64* /var/cache/apk/*
+    rm -Rf etcd-v$VERSION-linux-amd64*
 
 
 VOLUME /etcd-data
