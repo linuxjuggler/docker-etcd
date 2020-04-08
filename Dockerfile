@@ -15,7 +15,7 @@ LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0"
 
-ENV VERSION=3.4.6
+ENV VERSION=3.4.7
 
 RUN apk add --no-cache ca-certificates openssl tar tini && \
 	wget https://github.com/etcd-io/etcd/releases/download/v$VERSION/etcd-v$VERSION-linux-amd64.tar.gz && \
