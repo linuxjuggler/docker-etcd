@@ -4,7 +4,6 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG IMAGE_NAME
 ARG DOCKER_REPO
-ENV COMPOSER_ALLOW_SUPERUSER 1
 
 LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
       org.label-schema.name="$DOCKER_REPO:latest" \
