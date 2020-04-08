@@ -5,7 +5,7 @@ ARG VCS_REF
 ARG IMAGE_NAME
 ARG DOCKER_REPO
 
-LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
+LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.name="$DOCKER_REPO:latest" \
       org.label-schema.description="Lightweight container with ETCD based on Alpine Linux." \
       org.label-schema.url="https://www.zah.me" \
