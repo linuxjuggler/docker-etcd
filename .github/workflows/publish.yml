@@ -29,4 +29,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: zaherg/docker-etcd
           tag_with_ref: true
-          build_args: DOCKER_REPO=$DOCKER_REPO,IMAGE_NAME=$IMAGE_NAME,VCS_REF=$GITHUB_SHA,BUILD_DATE=$BUILD_DATE
+          build_args: DOCKER_REPO=${DOCKER_REPO},IMAGE_NAME=${IMAGE_NAME},VCS_REF=${GITHUB_SHA},BUILD_DATE=${BUILD_DATE}
