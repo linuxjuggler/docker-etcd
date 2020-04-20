@@ -3,9 +3,9 @@ name: Publish
 on: [push]
 
 env:
-  BUILD_DATE=2020-04-08T07:25:13Z
-  IMAGE_NAME=zaherg/docker-etcd
-  DOCKER_REPO=index.docker.io/zaherg/docker-etcd
+  BUILD_DATE: 2020-04-08T07:25:13Z
+  IMAGE_NAME: zaherg/docker-etcd
+  DOCKER_REPO: index.docker.io/zaherg/docker-etcd
 
 jobs:
   build:
