@@ -1,11 +1,7 @@
 name: Publish
 
-on:
-  push:
-    branches:
-      - master
-    tags:        
-      - "*"
+on: [push]
+
 env:
   BUILD_DATE=2020-04-08T07:25:13Z
   IMAGE_NAME=zaherg/docker-etcd
