@@ -1,17 +1,21 @@
 name: Publish
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    tags:        
+      - *
+env:
+  BUILD_DATE=2020-04-08T07:25:13Z
+  IMAGE_NAME=zaherg/docker-etcd
+  DOCKER_REPO=index.docker.io/zaherg/docker-etcd
 
 jobs:
   build:
     name: Build Docker Image
 
     runs-on: ubuntu-latest
-
-    env:
-      BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-      IMAGE_NAME=zaherg/docker-etcd
-      DOCKER_REPO=index.docker.io/zaherg/docker-etcd
 
     strategy:
       fail-fast: false
