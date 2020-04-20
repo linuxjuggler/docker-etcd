@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+      BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
       IMAGE_NAME=zaherg/docker-etcd
       DOCKER_REPO=index.docker.io/zaherg/docker-etcd
 
