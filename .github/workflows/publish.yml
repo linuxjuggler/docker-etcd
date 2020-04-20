@@ -1,0 +1,32 @@
+name: Publish
+
+on: [push]
+
+jobs:
+  build:
+    name: Build Docker Image
+
+    runs-on: ubuntu-latest
+
+    env:
+      BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+      IMAGE_NAME=zaherg/docker-etcd
+      DOCKER_REPO=index.docker.io/zaherg/docker-etcd
+
+    strategy:
+      fail-fast: false
+      max-parallel: 15
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: push latest
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: zaherg/docker-etcd
+          tag_with_ref: true
+          build_args: DOCKER_REPO=$DOCKER_REPO,IMAGE_NAME=$IMAGE_NAME,VCS_REF=$GITHUB_SHA,BUILD_DATE=$BUILD_DATE
