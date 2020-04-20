@@ -1,17 +1,9 @@
 FROM alpine:3.11.5
 
-ARG BUILD_DATE
-ARG VCS_REF
-ARG IMAGE_NAME
-ARG DOCKER_REPO
-
 LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
-      org.label-schema.name="$DOCKER_REPO:latest" \
       org.label-schema.description="Lightweight container with ETCD based on Alpine Linux." \
       org.label-schema.url="https://www.zah.me" \
-      org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/linuxjuggler/docker-etcd.git" \
-      org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0"
 
 ENV VERSION=3.4.7
