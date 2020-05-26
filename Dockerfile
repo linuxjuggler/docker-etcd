@@ -3,7 +3,7 @@ FROM alpine:3.11.6
 LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.description="Lightweight container with ETCD based on Alpine Linux." \
       org.label-schema.url="https://zaher.dev" \
-      org.label-schema.vcs-url="https://github.com/linuxjuggler/docker-etcd.git" \
+      org.label-schema.vcs-url="https://github.com/zaherg/docker-etcd.git" \
       org.label-schema.schema-version="1.0.0"
 
 ENV VERSION=3.4.9
