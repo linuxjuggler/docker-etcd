@@ -1,4 +1,4 @@
-FROM alpine:3.11.6
+FROM alpine:3.12.0
 
 LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.description="Lightweight container with ETCD based on Alpine Linux." \
