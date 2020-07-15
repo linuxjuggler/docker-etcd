@@ -5,7 +5,7 @@
 
 ![etcd Logo](https://raw.githubusercontent.com/linuxjuggler/docker-etcd/master/images/etcd-horizontal-color.svg?sanitize=true)
 
-etcd is a distributed reliable key-value store for the most critical data of a distributed system, with a focus on being:
+[etcd](https://github.com/etcd-io/etcd) is a distributed reliable key-value store for the most critical data of a distributed system, with a focus on being:
 
 * *Simple*: well-defined, user-facing API (gRPC)
 * *Secure*: automatic TLS with optional client cert authentication
