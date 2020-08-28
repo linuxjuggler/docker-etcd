@@ -6,7 +6,7 @@ LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.vcs-url="https://github.com/zaherg/docker-etcd.git" \
       org.label-schema.schema-version="1.0.0"
 
-ENV VERSION=3.4.10
+ENV VERSION=3.4.11
 
 RUN apk add --no-cache ca-certificates openssl tar tini && \
 	wget https://github.com/etcd-io/etcd/releases/download/v$VERSION/etcd-v$VERSION-linux-amd64.tar.gz && \
