@@ -1,5 +1,7 @@
 FROM alpine:3.12.0
 
+ARG TARGETPLATFORM
+
 LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.description="Lightweight container with ETCD based on Alpine Linux." \
       org.label-schema.url="https://zaher.dev" \
@@ -8,12 +10,14 @@ LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
 
 ENV VERSION=3.4.13
 
-RUN apk add --no-cache ca-certificates openssl tar tini && \
-	wget https://github.com/etcd-io/etcd/releases/download/v$VERSION/etcd-v$VERSION-linux-amd64.tar.gz && \
-	tar xzvf etcd-v$VERSION-linux-amd64.tar.gz && \
-	mv etcd-v$VERSION-linux-amd64/etcd* /bin/ && \
+RUN apk add --no-cache ca-certificates openssl tar tini
+
+RUN	wget https://github.com/etcd-io/etcd/releases/download/v${VERSION}/etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz
+
+RUN tar xzvf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
+	mv etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')/etcd* /bin/ && \
 	apk del --purge tar openssl && \
-    rm -Rf etcd-v$VERSION-linux-amd64*
+    rm -Rf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')*
 
 
 VOLUME /etcd-data
