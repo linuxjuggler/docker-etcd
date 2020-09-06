@@ -10,11 +10,9 @@ LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
 
 ENV VERSION=3.4.13
 
-RUN apk add --no-cache ca-certificates openssl tar tini
-
-RUN	wget https://github.com/etcd-io/etcd/releases/download/v${VERSION}/etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz
-
-RUN tar xzvf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
+RUN apk add --no-cache ca-certificates openssl tar tini && \
+	wget https://github.com/etcd-io/etcd/releases/download/v${VERSION}/etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
+	tar xzvf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
 	mv etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')/etcd* /bin/ && \
 	apk del --purge tar openssl && \
     rm -Rf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')*
