@@ -99,7 +99,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=zaherg/docker-etcd
+          DOCKER_IMAGE=ghcr.io/zaherg/docker-etcd
           VERSION=latest
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
