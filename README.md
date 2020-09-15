@@ -27,6 +27,8 @@ See [etcdctl][etcdctl] for a simple command line client.
 
 ## Example
 
+__PS__: If you are using GitHub Container Registry the path to the docker image should be `ghcr.io/zaherg/docker-etcd`.
+
 You can pass any argument to it as normal:
 
 ```sh
