@@ -56,3 +56,6 @@ docker exec etcd sh -c "ETCDCTL_API=3 etcdctl endpoint health"
 docker exec etcd sh -c "ETCDCTL_API=3 etcdctl put foo bar"
 docker exec etcd sh -c "ETCDCTL_API=3 etcdctl get foo"
 ```
+
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE-OF-CONDUCT.md). By participating in this project you agree to abide by its terms.
