@@ -9,7 +9,7 @@ LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.schema-version="1.0.0" \
       org.opencontainers.image.source="https://github.com/zaherg/docker-etcd"
 
-ENV VERSION=3.4.13
+ENV VERSION=3.4.14
 
 RUN apk add --no-cache ca-certificates openssl tar tini && \
 	wget https://github.com/etcd-io/etcd/releases/download/v${VERSION}/etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
