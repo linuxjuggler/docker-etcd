@@ -1,4 +1,4 @@
-FROM alpine:3.13.2
+FROM alpine:3.13.4
 
 ARG TARGETPLATFORM
 
@@ -11,7 +11,8 @@ LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
 
 ENV VERSION=3.4.15
 
-RUN apk add --no-cache curl ca-certificates openssl tar tini && \
+RUN apk update && apk upgrade && \
+    apk add --no-cache curl ca-certificates openssl tar tini && \
 	wget https://github.com/etcd-io/etcd/releases/download/v${VERSION}/etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
 	tar xzvf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g').tar.gz && \
 	mv etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')/etcd* /bin/ && \
@@ -19,7 +20,7 @@ RUN apk add --no-cache curl ca-certificates openssl tar tini && \
     rm -Rf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')*
 
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
-    && trivy filesystem --exit-code 1 --no-progress /
+    && trivy filesystem --light --exit-code 1 --no-progress /
 
 VOLUME /etcd-data
 
