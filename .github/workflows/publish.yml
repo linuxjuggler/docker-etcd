@@ -76,7 +76,6 @@ jobs:
           push: false
           builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/amd64
-          # push: ${{ github.event_name != 'pull_request' }}        
           tags: ${{ steps.prep.outputs.tags }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache       
@@ -98,69 +97,85 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache         
 
   
-  # github:
-  #   name: Build & Push [ghcr]
+  github:
+    name: Build & Push [ghcr]
 
-  #   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #   strategy:
-  #     fail-fast: false
-  #     max-parallel: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 15
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 1
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
-  #     - name: Prepare
-  #       id: prep
-  #       run: |
-  #         DOCKER_IMAGE=ghcr.io/zaherg/docker-etcd
-  #         VERSION=latest
-  #         if [[ $GITHUB_REF == refs/tags/* ]]; then
-  #           VERSION=${GITHUB_REF#refs/tags/v}
-  #         fi
-  #         if [ "${{ github.event_name }}" = "schedule" ]; then
-  #           VERSION=nightly
-  #         fi
-  #         TAGS="${DOCKER_IMAGE}:${VERSION}"
-  #         if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-  #           TAGS="$TAGS,${DOCKER_IMAGE}:latest"
-  #         fi
-  #         echo ::set-output name=tags::${TAGS}          
+      - name: Prepare
+        id: prep
+        run: |
+          DOCKER_IMAGE=ghcr.io/zaherg/docker-etcd
+          VERSION=latest
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            VERSION=nightly
+          fi
+          TAGS="${DOCKER_IMAGE}:${VERSION}"
+          if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+            TAGS="$TAGS,${DOCKER_IMAGE}:latest"
+          fi
+          echo ::set-output name=tags::${TAGS}          
 
-  #     - name: Set up QEMU
-  #       uses: docker/setup-qemu-action@master
-  #       with:
-  #         platforms: "amd64,arm64"
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@master
+        with:
+          platforms: "amd64,arm64"
 
-  #     - name: Set up Docker Buildx
-  #       id: buildx
-  #       uses: docker/setup-buildx-action@master
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
 
-  #     - name: Cache Docker layers
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: /tmp/.buildx-cache
-  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-buildx-
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
-  #     - name: Login to Github Package Registry
-  #       if: github.event_name != 'pull_request'
-  #       uses: docker/login-action@v1
-  #       with:
-  #         registry: ghcr.io
-  #         username: ${{ github.repository_owner }}
-  #         password: ${{ secrets.GHCR_TOKEN }}
+      - name: Login to Github Package Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
-  #     - name: Build
-  #       uses: docker/build-push-action@v2
-  #       with:
-  #         push: false
-  #         builder: ${{ steps.buildx.outputs.name }}
-  #         platforms: linux/amd64,linux/arm64
-  #         # push: ${{ github.event_name != 'pull_request' }} 
-  #         tags: ${{ steps.prep.outputs.tags }}
-  #         cache-from: type=local,src=/tmp/.buildx-cache
-  #         cache-to: type=local,dest=/tmp/.buildx-cache          
+      - name: Build for x64
+        uses: docker/build-push-action@v2
+        with:
+          load:  true
+          push: false
+          builder: ${{ steps.buildx.outputs.name }}
+          platforms: linux/amd64
+          tags: ${{ steps.prep.outputs.tags }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache       
+
+      - name: trivy test
+        run: |
+          docker pull ghcr.io/aquasecurity/trivy:0.18.1
+          docker run --rm aquasec/trivy:0.18.1 --exit-code 1 zaherg/docker-etcd:latest
+
+      - name: Build for multi-platform
+        if: ${{ success() }}
+        uses: docker/build-push-action@v2
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.event_name != 'pull_request' }}   
+          tags: ${{ steps.prep.outputs.tags }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache          
