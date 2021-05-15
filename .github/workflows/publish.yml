@@ -84,7 +84,7 @@ jobs:
       - name: trivy test
         run: |
           docker pull ghcr.io/aquasecurity/trivy:0.18.1
-          docker run --rm aquasec/trivy:0.18.1 zaherg/docker-etcd:latest
+          docker run --rm aquasec/trivy:0.18.1 --exit-code 1 zaherg/docker-etcd:latest
 
       - name: Build for multi-platform
         if: ${{ success() }}
