@@ -83,8 +83,9 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache       
 
-      - run: |
-        docker images
+      - name: check images
+        run: |
+          docker images
 
       - name: trivy test
         run: |
