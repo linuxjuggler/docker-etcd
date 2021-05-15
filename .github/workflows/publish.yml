@@ -15,7 +15,7 @@ env:
 
 jobs:
   dockerhub:
-    name: Build & Push [dockerhub]
+    name: Build & Push
 
     runs-on: ubuntu-latest
 
@@ -91,7 +91,7 @@ jobs:
       - name: trivy test
         run: |
           docker pull ghcr.io/aquasecurity/trivy:0.18.1
-          docker run --rm aquasec/trivy:0.18.1 ${{ steps.buildx.outputs.name }}
+          docker run --rm aquasec/trivy:0.18.1 zaherg/docker-etcd:latest
 
       - name: Build for multi-platform
         uses: docker/build-push-action@v2
