@@ -19,11 +19,11 @@ RUN apk update && apk upgrade && \
 	apk del --purge tar openssl && \
     rm -Rf etcd-v${VERSION}-$(echo ${TARGETPLATFORM} | sed -e 's/linux\//linux-/g')*
 
-RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
+# RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
 
-RUN trivy filesystem --exit-code 1 --no-progress /
+# RUN trivy filesystem --exit-code 1 --no-progress /
 
-RUN rm -fr /usr/local/bin/trivy
+# RUN rm -fr /usr/local/bin/trivy
 
 VOLUME /etcd-data
 
