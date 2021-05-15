@@ -1,4 +1,4 @@
-FROM alpine:3.13.4
+FROM alpine:3.13.5
 
 ARG TARGETPLATFORM
 
@@ -9,7 +9,7 @@ LABEL Maintainer="Zaher Ghaibeh <zaher@zah.me>" \
       org.label-schema.schema-version="1.0.0" \
       org.opencontainers.image.source="https://github.com/zaherg/docker-etcd"
 
-ENV VERSION=3.4.15
+ENV VERSION=3.4.16
 
 RUN apk update && apk upgrade && \
     apk add --no-cache curl ca-certificates openssl tar tini && \
@@ -21,6 +21,8 @@ RUN apk update && apk upgrade && \
 
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
     && trivy filesystem --exit-code 1 --no-progress /
+
+RUN rm -fr /usr/local/bin/trivy
 
 VOLUME /etcd-data
 
